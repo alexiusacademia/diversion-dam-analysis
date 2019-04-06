@@ -205,4 +205,18 @@ def percent_correction(hd_ho, hdd_ho):
         2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.8
     ]
 
+    z = 6
+
+    if hd_ho == 0:
+        PC = 100
+    if hdd_ho < 1:
+        PC = 0
+
+    for a in range(40-1):
+        if (hdd_ho > hd_d[a]) and (hdd_ho < hd_d[a + 1]):
+            for i in range(1, z-1):
+                if (hd_h[a, i] < hd_ho) and (hd_h[a, i+1] > hd_ho):
+                    pass
+
+
     # TODO To be continued
