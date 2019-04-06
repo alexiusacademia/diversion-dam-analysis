@@ -214,13 +214,27 @@ def percent_correction(hd_ho, hdd_ho):
 
     for a in range(40-1):
         if (hdd_ho > hd_d[a]) and (hdd_ho < hd_d[a + 1]):
-            for i in range(1, z):
+            for i in range(z-1):
                 if (hd_h[a, i] < hd_ho) and (hd_h[a, i+1] > hd_ho):
                     hd_ho_11 = hd_h[a, i]
                     hd_ho_12 = hd_h[a, i+1]
                     p_11 = percentage[i]
-                    P_12 = percentage[i + 1]
-                    x = interpolate()
+                    p_12 = percentage[i + 1]
+                    x = interpolate(p_11, p_12, hd_ho_11, hd_ho, hd_ho_12)
+                    break
 
+            for j in range(z-1):
+                if (hd_h[a+1, i] < hd_ho) and (hd_h[a+1, i + 1] > hd_ho):
+                    hd_ho_21 = hd_h[a + 1, i]
+                    hd_ho_22 = hd_h[a + 1, i + 1]
+                    p_21 = percentage[i]
+                    p_22 = percentage[i + 1]
+                    y = interpolate(p_21, p_22, hd_ho_21, hd_ho, hd_ho_22)
+                    break
+            correction = interpolate(x, y, hd_d[a], hdd_ho, hd_d[a + 1])
+        if a > 21:
+            z = 28
+        else:
+            z = z + 1
 
-    # TODO To be continued
+    return correction
